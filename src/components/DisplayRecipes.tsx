@@ -107,13 +107,22 @@ const DisplayRecipes = () => {
     }
   };
 
+  const handleCloseDeleteModal = () => {
+    setDeleteModal(false);
+  };
+
+  const handleCloseUpdateModal = () => {
+    setUpdateRecipe(false);
+  };
+
   return (
     <>
       {allRecipeData.map((recipe) => (
         <Collapse key={recipe.id}>
           <Panel key={recipe.id} header={recipe.recipe_name} showArrow={false}>
             <div>
-              <Button
+              <button
+                className="border"
                 onClick={() => {
                   console.log(allQuantityData);
                   setUpdateRecipe(true);
@@ -134,14 +143,16 @@ const DisplayRecipes = () => {
                 }}
               >
                 Edit
-              </Button>
-              <Button
+              </button>
+              <button
+                className="solid"
+                style={{ minWidth: "140px", backgroundColor: "#e13756" }}
                 onClick={() => {
                   setDeleteModal(true);
                 }}
               >
                 Delete
-              </Button>
+              </button>
             </div>
             <div>
               <p>
@@ -180,7 +191,11 @@ const DisplayRecipes = () => {
                 </Tag>
               </p>
             </div>
-            <Modal open={updateRecipe} title={"Update Recipe"}>
+            <Modal
+              open={updateRecipe}
+              title={"Update Recipe"}
+              onCancel={handleCloseUpdateModal}
+            >
               <RecipeForm
                 handleUpdate={true}
                 currentRecipeId={currentRecipeId}
@@ -202,12 +217,12 @@ const DisplayRecipes = () => {
             <Modal
               title="Are you sure you want to delete this recipe?"
               open={deleteModal}
-              onCancel={closeDeleteModal}
+              onCancel={handleCloseDeleteModal}
               footer={[
                 <Button
                   key="back"
                   onClick={() => {
-                    handleDeleteRecipe(recipe);
+                    handleCloseDeleteModal();
                   }}
                 >
                   Cancel

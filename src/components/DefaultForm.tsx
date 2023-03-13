@@ -15,12 +15,30 @@ const DefaultForm = (props) => {
   return (
     <Form onFinish={props.handle_submit}>
       <Form.Item rules={[{ required: true }]}>
-        <Input
+        <input
           placeholder="Enter recipe name"
           defaultValue={
             props.default_recipe_name ? props.default_recipe_name : null
           }
           onChange={(e) => props.recipe_name_setter(e.target.value)}
+        />
+      </Form.Item>
+      <Form.Item>
+        <textarea
+          style={{ minHeight: "140px" }}
+          maxLength={50}
+          defaultValue={props.default_how_to ? props.default_how_to : null}
+          onChange={(e) => props.how_to_setter(e.target.value)}
+        />
+      </Form.Item>
+      <Form.Item>
+        <Segmented
+          options={props.category_options.map((option) => ({
+            label: option,
+            value: option,
+          }))}
+          defaultValue={props.default_category ? props.default_category : null}
+          onChange={(e) => props.category_setter(e)}
         />
       </Form.Item>
       <Form.Item>
@@ -43,7 +61,9 @@ const DefaultForm = (props) => {
                     defaultValue={selectedIngredientNames[index]}
                   />
 
-                  <InputNumber
+                  <input
+                    type="number"
+                    min={1}
                     placeholder="Enter quantity"
                     defaultValue={selectedQuantities[index]}
                     onChange={(value) =>
@@ -52,11 +72,12 @@ const DefaultForm = (props) => {
                     style={{ marginRight: 8 }}
                   />
                   {index >= 0 && (
-                    <Button
-                      type="link"
+                    <button
+                      className="error"
                       onClick={() => props.remove_ingredient(index)}
-                      icon={<MinusCircleOutlined />}
-                    />
+                    >
+                      Remove
+                    </button>
                   )}
                 </>
                 ;
@@ -66,17 +87,25 @@ const DefaultForm = (props) => {
         ) : (
           props.ingredients.map((ingredient, index) => (
             <div key={index} style={{ display: "flex", alignItems: "center" }}>
-              <Select
+              <select
+                style={{ width: "215px", minHeight: "50px" }}
                 placeholder="Ingredient Name"
                 onSelect={(value) =>
                   props.handle_ingredient_change(index, "name", value)
                 }
-                options={props.all_ingredient_names}
-                style={{ marginRight: 8 }}
-                defaultValue={undefined}
-              />
+                defaultValue={
+                  props.default_ingredients ? ingredient.name : null
+                }
+              >
+                {props.all_ingredient_names.map((ingredient) => {
+                  return (
+                    <option value={ingredient.value}>{ingredient.value}</option>
+                  );
+                })}
+              </select>
 
-              <InputNumber
+              <input
+                type="number"
                 placeholder="Enter quantity"
                 defaultValue={
                   props.default_ingredients ? ingredient.quantity : 1
@@ -87,46 +116,24 @@ const DefaultForm = (props) => {
                 style={{ marginRight: 8 }}
               />
               {index >= 0 && (
-                <Button
-                  type="link"
+                <button
+                  className="error"
                   onClick={() => props.remove_ingredient(index)}
-                  icon={<MinusCircleOutlined />}
-                />
+                >
+                  Remove
+                </button>
               )}
             </div>
           ))
         )}
-        <Button
-          type="dashed"
-          onClick={props.add_ingredient}
-          style={{ marginTop: 8 }}
-        >
+      </Form.Item>
+      <Form.Item>
+        <button className="border" onClick={props.add_ingredient}>
           Add Ingredient
-        </Button>
-      </Form.Item>
-      <Form.Item>
-        <Segmented
-          options={props.category_options.map((option) => ({
-            label: option,
-            value: option,
-          }))}
-          defaultValue={props.default_category ? props.default_category : null}
-          onChange={(e) => props.category_setter(e)}
-        />
-      </Form.Item>
-      <Form.Item>
-        <TextArea
-          showCount
-          maxLength={50}
-          defaultValue={props.default_how_to ? props.default_how_to : null}
-          onChange={(e) => props.how_to_setter(e.target.value)}
-          placeholder="How To"
-        />
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
+        </button>
+        <button className="solid" type="submit">
           Add Recipe
-        </Button>
+        </button>
       </Form.Item>
     </Form>
   );

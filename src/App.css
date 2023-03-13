@@ -1,44 +1,104 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  background-color: aliceblue;
+* {
+  transition: all 0.2s;
+  line-height: 1;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  align-items: center;
+  margin: 20px 100px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h2 {
+  margin-top: 50px;
+  text-decoration: underline;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+button {
+  margin: 20px 0;
+  margin-right: 10px;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  font-weight: 600;
+  z-index: 1;
 }
 
-.card {
-  padding: 2em;
+button.solid {
+  min-height: 40px;
+  padding: 5px 20px;
+  min-width: 140px;
+  background-color: #16161a;
+  color: white;
+}
+button.solid:hover {
+  opacity: 0.9;
+}
+button.solid:active {
+  opacity: 0.8;
 }
 
-.read-the-docs {
-  color: #888;
+input,
+select,
+textarea {
+  width: 300px;
+  margin: 10px 0;
+  border: none;
+  outline: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  display: flex;
+  padding: 5px 20px;
+  min-height: 40px;
+  background-color: #e4e9ec;
+  color: #16161a;
 }
 
+textarea {
+  max-width: 300px;
+  min-width: 300px;
+}
+
+input[type="number"] {
+  padding-right: 3px;
+  width: 30px;
+}
+
+input:active {
+  background-color: #c6cdd7;
+}
+
+button.border {
+  min-width: 140px;
+  padding: 5px 20px;
+  min-height: 40px;
+  background-color: white;
+  color: #16161a;
+  border: 2px solid #16161a;
+}
+
+button.border:hover {
+  background-color: #e4e9ec;
+}
+
+button.border:active {
+  background-color: #d7dde4;
+}
+
+button.error {
+  margin-left: 8px;
+  min-height: 30px;
+  background-color: #fcdee45a;
+  color: #e13756;
+}
+button.error:hover {
+  background-color: #fcdee4a2;
+}
+button.error:active {
+  background-color: #fcdee4;
+}
+
+select {
+  width: 80px;
+}
